@@ -1,0 +1,35 @@
+{
+  "name": "thetieguy-online-store",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0",
+    "prebuild": "node -e \"const fs=require('fs'),p='scripts/prebuild-check.mjs';if(!fs.existsSync(p)){console.log('prebuild-check: skipped (scripts/prebuild-check.mjs not present in this deployment)');process.exit(0)}const r=require('child_process').spawnSync(process.execPath,[p],{stdio:'inherit'});process.exit(r.status===0?0:1)\"",
+    "build": "next build",
+    "start": "next start -H 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "verify:deploy": "node scripts/verify-deploy.mjs",
+    "test": "node --import tsx --test tests/*.test.mjs",
+    "test:routes": "node tests/routes.integration.mjs && node tests/merchandising.routes.integration.mjs",
+    "test:thankyou": "node tests/thankyou.ui-smoke.mjs",
+    "test:nav": "node tests/navigation.ui-smoke.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.0",
+    "lucide-react": "^0.468.0",
+    "next": "15.5.26",
+    "react": "19.1.9",
+    "react-dom": "19.1.9"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^20.17.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.7.3"
+  }
+}
